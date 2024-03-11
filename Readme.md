@@ -94,6 +94,25 @@ base模型生成小图, refiner模型生成大图
 + https://github.com/ZHO-ZHO-ZHO/ComfyUI-YoloWorld-EfficientSAM
 + https://openart.ai/workflows/datou/ootdiffusion/8XE70w17xstgLBOCl4Bl
 
+# 人像检测
+
+## 使用 comfyUI manager 安装 custom node
+
++ open comfyUI manager
++ install Custom Nodes
+
+## 使用 yolov8 实现人脸检测
+
+https://github.com/zcfrank1st/Comfyui-Yolov8
+
++ yolov8 - detection/seg
++ mask - convert mask to image
+
+## yolo-world
++ https://github.com/ZHO-ZHO-ZHO/ComfyUI-YoloWorld-EfficientSAM
++ https://github.com/AILab-CVC/YOLO-World
++ https://github.com/yformer/EfficientSAM
+
 # 其他
 
 ## 模型
