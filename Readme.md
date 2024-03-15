@@ -87,7 +87,24 @@ base模型生成小图, refiner模型生成大图
   + 复制 prompt , text 连到 base text
   + base 高阶采样器输出到 refiner 高阶采样器, steps 与 base 一致, start_at_step = base end_at_step, end_at_stetp >= steps, return_with_leftover_noise false(可以使用 utils-Primitive 简化)
 
-  
+# Rave & animateDiff
+https://www.youtube.com/watch?v=7ZxsBmUm3Lg
++ workflow: https://github.com/Nuked88/DreamingAI/blob/main/T13_video_to_video.json
++ customNode
+  + ComfyUI-N-Suite
+  + comfyui-reactor-node
++ model
+  + Checkpoint: [MeinaMix_V10](https://huggingface.co/Meina/MeinaMix_V10/tree/main/safety_checker)
+  + Controlnet: [control_v11p_sd15_lineart.pth](https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main)
+  + Lora: [pytorch_lora_weights.safetensors](https://huggingface.co/Yashhhhmishra/pytorch_lora_weights.safetensors/blob/main/pytorch_lora_weights.safetensors)
+  + animatediff_models: [temporaldiff-v1-animatediff.ckpt](https://huggingface.co/CiaraRowles/TemporalDiff/blob/main/temporaldiff-v1-animatediff.ckpt)
+  + ReActorFaceSwap: 
+    + insightface: [inswapper_128.onnx](https://huggingface.co/ezioruan/inswapper_128.onnx/tree/main)
+    + facerestore_models: [codeformer.pth](https://github.com/sczhou/CodeFormer/releases)
+
++ Pip requirements
+  + imageio-ffmpeg
+![1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png](pic%2F1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png)
 
 # 一些有意思的项目
 
@@ -127,3 +144,22 @@ https://github.com/zcfrank1st/Comfyui-Yolov8
 
 ## prompt 
 + https://prompthero.com/midjourney-prompts
+
+## 一些名词
++ SDXL
++ RAVE: https://rave-video.github.io/
++ animateDiff
+  + https://www.youtube.com/watch?v=fxNqWTGh3ZM
+  + https://www.youtube.com/watch?v=D3A6GeYq5LQ
+  + https://heehel.com/aigc/comfyui-animationdiff.html
++ heygen: 数字人做的比较好的国外厂商/ ai avatar video
++ dreamTalk: github
++ wav2lip: github
++ sadTalk: github
++ tts
++ sag
++ sam
++ controller
++ lora
++ sora
++ rag
