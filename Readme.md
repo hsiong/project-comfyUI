@@ -101,7 +101,7 @@ https://www.youtube.com/watch?v=7ZxsBmUm3Lg
   + ReActorFaceSwap: 
     + insightface: [inswapper_128.onnx](https://huggingface.co/ezioruan/inswapper_128.onnx/tree/main)
     + facerestore_models: [codeformer.pth](https://github.com/sczhou/CodeFormer/releases)
-
+  + comfyui_controlnet_aux\ckpts\lllyasviel/Annotators: [150_16_swin_l_oneformer_coco_100ep.pth](https://huggingface.co/lllyasviel/Annotators/blob/main/150_16_swin_l_oneformer_coco_100ep.pth)
 + Pip requirements
   + imageio-ffmpeg
 ![1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png](pic%2F1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png)
