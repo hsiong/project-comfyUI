@@ -44,7 +44,8 @@ add color, add group, add general-note
 
 > 参数说明: 
 >
-> + seed: 采样器编号, fixed/randomize, 同一张图片, 同一个seed
+> + seed: 采样器编号, fixed/randomize, 同一张图片, 同一个seed'
+>   + add random: primitive node, connect to input
 > + add_noise: enable
 > + cfg: 与 prompt 相关程度, 建议在 10 左右
 > + sampler_name: 由经典的常微分方程求解方程命名的sampler
@@ -105,6 +106,35 @@ https://www.youtube.com/watch?v=7ZxsBmUm3Lg
 + Pip requirements
   + imageio-ffmpeg
 ![1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png](pic%2F1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png)
+
+> error: 
+> ERROR:root:!!! Exception during processing !!!
+ERROR:root:Traceback (most recent call last):
+  File "D:\software\ComfyUI-aki\aki\ComfyUI-aki-v1.2\execution.py", line 152, in recursive_execute
+    output_data, output_ui = get_output_data(obj, input_data_all)
+  File "D:\software\ComfyUI-aki\aki\ComfyUI-aki-v1.2\execution.py", line 82, in get_output_data
+    return_values = map_node_over_list(obj, input_data_all, obj.FUNCTION, allow_interrupt=True)
+  File "D:\software\ComfyUI-aki\aki\ComfyUI-aki-v1.2\execution.py", line 75, in map_node_over_list
+    results.append(getattr(obj, func)(**slice_dict(input_data_all, i)))
+  File "D:\software\ComfyUI-aki\aki\ComfyUI-aki-v1.2\nodes.py", line 552, in load_checkpoint
+    out = comfy.sd.load_checkpoint_guess_config(ckpt_path, output_vae=True, output_clip=True, embedding_directory=folder_paths.get_folder_paths("embeddings"))
+  File "D:\software\ComfyUI-aki\aki\ComfyUI-aki-v1.2\comfy\sd.py", line 448, in load_checkpoint_guess_config
+    model_config = model_detection.model_config_from_unet(sd, "model.diffusion_model.", unet_dtype)
+  File "D:\software\ComfyUI-aki\aki\ComfyUI-aki-v1.2\comfy\model_detection.py", line 164, in model_config_from_unet
+    unet_config = detect_unet_config(state_dict, unet_key_prefix, dtype)
+  File "D:\software\ComfyUI-aki\aki\ComfyUI-aki-v1.2\comfy\model_detection.py", line 49, in detect_unet_config
+    model_channels = state_dict['{}input_blocks.0.0.weight'.format(key_prefix)].shape[0]
+KeyError: 'model.diffusion_model.input_blocks.0.0.weight'
+> 
+> => change model
+> 
+ 
+> Error occurred when executing ReActorFaceSwap: This ORT build has ['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'] enabled. Since ORT 1.9, you are required to explicitly set the providers parameter when instantiating InferenceSession. For example, onnxruntime.InferenceSession(..., providers=['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'], ...)
+> 
+> => onnx 1.15.0 
+> onnxruntime 1.16.1 
+> onnxruntime-gpu 1.15.1 
+> pip install onnxruntime==1.15.1 solve my issue
 
 # 一些有意思的项目
 
