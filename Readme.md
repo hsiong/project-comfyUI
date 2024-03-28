@@ -81,15 +81,48 @@ base模型生成小图, refiner模型生成大图
   + change CLIP Text Encode to input
   + text 拉出来,  add node - utils - Primitive 
   + 采样器改为 sampling - KSampler(Advanced)
-
 + refiner:
 
   + 增加 refiner - checkpoint
   + 复制 prompt , text 连到 base text
   + base 高阶采样器输出到 refiner 高阶采样器, steps 与 base 一致, start_at_step = base end_at_step, end_at_stetp >= steps, return_with_leftover_noise false(可以使用 utils-Primitive 简化)
 
-# Rave & animateDiff
-https://www.youtube.com/watch?v=7ZxsBmUm3Lg
+# Controlnet
+
++ \+ [万字干货！一口气掌握14种 ControlNet 官方控图模型的使用方法！](https://www.uisdc.com/stable-diffusion-guide-6)
+
+## 轮廓类
+
+轮廓类模型有 Canny 硬边缘、MLSD 直线、Lineart 真实线稿、Lineart_anime 动漫线稿、SoftEdge 软边缘、Segmentation 语义分割、Shuffle 随机洗牌这 7 种，且每种模型都配有相应的预处理器
+
+![万字干货！一口气掌握14种 ControlNet 官方控图模型的使用方法！](https://image.uisdc.com/wp-content/uploads/2023/09/uisdc-sx-20230925-4.jpg)
+
+### Canny 硬边缘
+
+该模型源自图像处理领域的边缘检测算法，可以识别并提取图像中的边缘特征并输送到新的图像中。
+
++ canny（硬边缘检测）预处理器
+
+canny 可以准确提取出画面中元素边缘的线稿，即使配合不同的主模型进行绘图都可以精准还原画面中的内容布局。
+
+![万字干货！一口气掌握14种 ControlNet 官方控图模型的使用方法！](https://image.uisdc.com/wp-content/uploads/2023/09/uisdc-sx-20230925-6.jpg)
+
++ invert（白底黑线反色）的预处理器
+
+它的功能并非是提取图像的空间特征，而是将线稿进行颜色反转。我们通过 Canny 等线稿类的预处理器提取得到的预览图都是黑底白线，但大部分的传统线稿都是白底黑线，为方便使用，很多时候我们需要将两者进行颜色转换，传统做法都是导出到 PS 等工具进行额外处理，非常繁琐。而 ControlNet 中贴心的内置了颜色反转的预处理功能，可以轻松实现将手绘线稿转换成模型可识别的预处理线稿图。
+
+理解了 invert 的功能，我们就知道该预处理器并非 Canny 独有，而是可以配合大部分线稿模型使用。在最新版的 ControlNet 中，当我们选择 MLSD 直线、Lineart 线稿等控制类型时，预处理器中都能看到它的身影，后续就不挨个赘述了。
+
+![万字干货！一口气掌握14种 ControlNet 官方控图模型的使用方法！](https://image.uisdc.com/wp-content/uploads/2023/09/uisdc-sx-20230925-7.jpg)
+
+
+
++ [Mastering ComfyUI: Creating Stunning Human Poses with ControlNet! - TUTORIAL](https://www.youtube.com/watch?v=w9fc3pIkl0w)
+
+# animateDiff
+
+## [Mastering AI Animation: Use Auto-Mask, ControlNet and AnimateDiff Evolved! - Video To Video](https://www.youtube.com/watch?v=7ZxsBmUm3Lg)
+
 + workflow: https://github.com/Nuked88/DreamingAI/blob/main/T13_video_to_video.json
 + customNode
   + ComfyUI-N-Suite
@@ -105,7 +138,7 @@ https://www.youtube.com/watch?v=7ZxsBmUm3Lg
   + comfyui_controlnet_aux\ckpts\lllyasviel/Annotators: [150_16_swin_l_oneformer_coco_100ep.pth](https://huggingface.co/lllyasviel/Annotators/blob/main/150_16_swin_l_oneformer_coco_100ep.pth)
 + Pip requirements
   + imageio-ffmpeg
-![1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png](pic%2F1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png)
+  ![1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png](pic%2F1710498296388_919E60E5-10D8-46fa-B10B-3CD98A7DC0DB.png)
 
 > error: 
 > ERROR:root:!!! Exception during processing !!!
@@ -128,7 +161,7 @@ KeyError: 'model.diffusion_model.input_blocks.0.0.weight'
 > 
 > => change model
 > 
- 
+
 > Error occurred when executing ReActorFaceSwap: This ORT build has ['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'] enabled. Since ORT 1.9, you are required to explicitly set the providers parameter when instantiating InferenceSession. For example, onnxruntime.InferenceSession(..., providers=['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'], ...)
 > 
 > => onnx 1.15.0 
@@ -136,14 +169,33 @@ KeyError: 'model.diffusion_model.input_blocks.0.0.weight'
 > onnxruntime-gpu 1.15.1 
 > pip install onnxruntime==1.15.1 solve my issue
 
-# 一些有意思的项目
++ [Mastering ComfyUI: Getting Started with Video to Video!](https://www.youtube.com/watch?v=nMyiuiWjiEc)
++ [ComfyUI图片转视频📽，轻松上手AI视频制作, Image To Video ,用图像讲故事，内容更出彩！ #comfyui #aigc #videogeneration]: https://www.youtube.com/watch?v=C8IzGKMv5Wk
 
-+ https://github.com/ZHO-ZHO-ZHO/ComfyUI-YoloWorld-EfficientSAM
-+ https://openart.ai/workflows/datou/ootdiffusion/8XE70w17xstgLBOCl4Bl
+# ReActor: Face Swap
+
++  [Mastering ComfyUI: How to use ReActor for Face Swap - TUTORIAL](https://www.youtube.com/watch?v=gcLBPILYgrc)
++ 
+
+# LDSR
+
++ [Upscalers Roundup + Full Workflow - LDSR, Ultimate SD, Models, HiRes Fix, Latent Upscale + Topaz](https://www.youtube.com/watch?v=9qHidG7H_8k)
+
+# ComfyUI - API
+
++ [Mastering ComfyUI: Getting started with API - TUTORIAL](https://www.youtube.com/watch?v=va8Jkc7o9d4)
+
+
+
+# Custom node
+
++ [How to make your own custom ComfyUI nodes](https://www.youtube.com/watch?v=tr_0qnwLQ0I)
++ [Clone a Simple Demo: ComfyUI-audio](https://github.com/eigenpunk/ComfyUI-audio)
++ 
 
 # 人像检测
 
-## 使用 comfyUI manager 安装 custom node
+## 使用 comfyUI manager 安装 
 
 + open comfyUI manager
 + install Custom Nodes
@@ -159,6 +211,16 @@ https://github.com/zcfrank1st/Comfyui-Yolov8
 + https://github.com/ZHO-ZHO-ZHO/ComfyUI-YoloWorld-EfficientSAM
 + https://github.com/AILab-CVC/YOLO-World
 + https://github.com/yformer/EfficientSAM
+
+# TTS
+
++ [Text-to-Music is REAL with AudioCraft's Mind-Blowing AI Technology! - TUTORIAL](https://www.youtube.com/watch?v=YIjDYJQhIio&list=PLy2-ecgW7TY7OMOMEqSJY72vygltspO1_&index=4)
++ [github-audiocraft](https://github.com/facebookresearch/audiocraft)
++ [suno-tts: github-bark](https://github.com/suno-ai/bark)
+
+# ootDiffusion
+
++ https://openart.ai/workflows/datou/ootdiffusion/8XE70w17xstgLBOCl4Bl
 
 # 其他
 
@@ -188,7 +250,6 @@ https://github.com/zcfrank1st/Comfyui-Yolov8
 + sadTalk: github
 + tts
 + sag
-+ sam
 + controller
 + lora
 + sora
